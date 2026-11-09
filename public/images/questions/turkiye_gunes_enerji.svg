@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 500" width="100%" height="100%" className="rounded-xl shadow-lg">
+  <defs>
+    <linearGradient id="solarBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1526"/>
+      <stop offset="100%" stop-color="#040b15"/>
+    </linearGradient>
+    <linearGradient id="potGradHigh" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f97316" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#ef4444" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="potGradMed" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#eab308" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#f97316" stop-opacity="0.75"/>
+    </linearGradient>
+    <linearGradient id="potGradLow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#eab308" stop-opacity="0.6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="840" height="500" fill="url(#solarBg)" rx="16"/>
+  <rect x="8" y="8" width="824" height="484" fill="none" stroke="#1e293b" stroke-width="2" rx="12"/>
+
+  <!-- Title -->
+  <text x="420" y="38" font-family="'Nunito Sans', sans-serif" font-size="20" font-weight="700" fill="#facc15" text-anchor="middle" letter-spacing="0.5">
+    TÜRKİYE GÜNEŞ ENERJİSİ POTANSİYELİ VE ENERJİ DÖNÜŞÜMÜ
+  </text>
+  <text x="420" y="60" font-family="'Nunito Sans', sans-serif" font-size="12" font-weight="500" fill="#94a3b8" text-anchor="middle">
+    GEPA (Güneş Enerjisi Potansiyel Atlası) ve Enterkonnekte Şebeke Dağılımı
+  </text>
+
+  <!-- Turkey Solar Zones Map -->
+  <g transform="translate(60, 50)">
+    <!-- Base Shape -->
+    <path d="M60 170 C90 140, 150 120, 240 130 C300 135, 360 100, 440 95 C520 90, 600 110, 670 140 C690 170, 710 220, 680 260 C650 280, 590 285, 520 280 C440 280, 390 310, 310 300 C220 295, 140 290, 80 270 C50 250, 40 200, 60 170 Z"
+          fill="#0f172a" stroke="#334155" stroke-width="2"/>
+
+    <!-- Zone 1: Karadeniz Kuşağı (Düşük Potansiyel: <1400 kWh/m2) -->
+    <path d="M60 170 C100 130, 200 115, 300 125 C400 115, 500 100, 670 140 L650 170 C500 140, 350 155, 200 160 C120 165, 80 180, 60 170 Z"
+          fill="url(#potGradLow)" stroke="#38bdf8" stroke-width="1.2"/>
+    <text x="360" y="142" font-family="'Nunito Sans', sans-serif" font-size="11" font-weight="700" fill="#f8fafc">
+      Karadeniz Kuşağı: Bulutluluk yüksek (~1300-1400 kWh/m²·yıl)
+    </text>
+
+    <!-- Zone 2: İç ve Ege Kuşağı (Orta Potansiyel: 1500-1650 kWh/m2) -->
+    <path d="M70 185 C140 170, 260 165, 380 165 C500 160, 600 175, 660 195 L650 230 C550 220, 400 215, 260 225 C160 230, 100 240, 70 215 Z"
+          fill="url(#potGradMed)" stroke="#eab308" stroke-width="1.2"/>
+    <text x="360" y="200" font-family="'Nunito Sans', sans-serif" font-size="11" font-weight="700" fill="#0f172a">
+      İç Anadolu ve Ege Kuşağı: Orta-Yüksek Potansiyel (~1550 kWh/m²·yıl)
+    </text>
+
+    <!-- Zone 3: Güneydoğu ve Akdeniz Kuşağı (En Yüksek Potansiyel: >1700 kWh/m2) -->
+    <path d="M80 235 C150 235, 250 230, 360 225 C460 220, 580 235, 660 235 L680 260 C650 280, 590 285, 520 280 C440 280, 390 310, 310 300 C220 295, 140 290, 80 270 Z"
+          fill="url(#potGradHigh)" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="360" y="265" font-family="'Nunito Sans', sans-serif" font-size="12" font-weight="800" fill="#ffffff">
+      GÜNEYDOĞU VE AKDENİZ: EN YÜKSEK POTANSİYEL (&gt;1750 kWh/m²·yıl)
+    </text>
+
+    <!-- Güneş Enerji Santralleri (GES) Simgeleri -->
+    <!-- Karapınar GES (Konya) -->
+    <g transform="translate(320, 230)">
+      <polygon points="0,-12 12,0 0,12 -12,0" fill="#facc15" stroke="#ffffff" stroke-width="1.8"/>
+      <rect x="14" y="-12" width="165" height="24" rx="4" fill="#0f172a" stroke="#facc15" stroke-width="1.2"/>
+      <text x="20" y="4" font-family="'Nunito Sans', sans-serif" font-size="11" font-weight="800" fill="#facc15">
+        Karapınar GES (Konya - 1350 MW)
+      </text>
+    </g>
+
+    <!-- Güneydoğu GES Kümesi (Şanlıurfa / Mardin) -->
+    <g transform="translate(530, 250)">
+      <polygon points="0,-10 10,0 0,10 -10,0" fill="#facc15" stroke="#ffffff" stroke-width="1.8"/>
+      <rect x="14" y="-12" width="145" height="24" rx="4" fill="#0f172a" stroke="#facc15" stroke-width="1.2"/>
+      <text x="20" y="4" font-family="'Nunito Sans', sans-serif" font-size="11" font-weight="800" fill="#facc15">
+        Güneydoğu GES Kümesi
+      </text>
+    </g>
+  </g>
+
+  <!-- LEJANT & Analitik Bilgi Paneli -->
+  <g transform="translate(60, 400)">
+    <rect width="720" height="70" rx="8" fill="#0f172a" stroke="#334155" stroke-width="1.2"/>
+    <text x="20" y="24" font-family="'Nunito Sans', sans-serif" font-size="12" font-weight="700" fill="#94a3b8">
+      YILLIK GÜNEŞLENME SÜRESİ VE IŞINIM ŞİDDETİ:
+    </text>
+
+    <!-- Renk Skalası -->
+    <rect x="20" y="36" width="30" height="18" fill="#38bdf8" rx="3"/>
+    <text x="56" y="50" font-family="'Nunito Sans', sans-serif" font-size="11" font-weight="600" fill="#cbd5e1">Düşük (&lt;1400 kWh)</text>
+
+    <rect x="180" y="36" width="30" height="18" fill="#eab308" rx="3"/>
+    <text x="216" y="50" font-family="'Nunito Sans', sans-serif" font-size="11" font-weight="600" fill="#cbd5e1">Orta (1500–1650 kWh)</text>
+
+    <rect x="360" y="36" width="30" height="18" fill="#ef4444" rx="3"/>
+    <text x="396" y="50" font-family="'Nunito Sans', sans-serif" font-size="11" font-weight="600" fill="#cbd5e1">Yüksek (&gt;1750 kWh)</text>
+
+    <polygon points="560,40 568,48 560,56 552,48" fill="#facc15" stroke="#ffffff" stroke-width="1.5"/>
+    <text x="575" y="50" font-family="'Nunito Sans', sans-serif" font-size="11" font-weight="700" fill="#facc15">Büyük GES Yatırımları</text>
+  </g>
+</svg>

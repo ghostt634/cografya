@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 480" width="100%" height="100%" className="rounded-xl shadow-lg">
+  <defs>
+    <linearGradient id="chartBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1526"/>
+      <stop offset="100%" stop-color="#040b15"/>
+    </linearGradient>
+    <linearGradient id="stressAreaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ef4444" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#ef4444" stop-opacity="0.05"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="820" height="480" fill="url(#chartBg)" rx="16"/>
+  <rect x="8" y="8" width="804" height="464" fill="none" stroke="#1e293b" stroke-width="2" rx="12"/>
+
+  <!-- Title -->
+  <text x="410" y="38" font-family="'Nunito Sans', sans-serif" font-size="20" font-weight="700" fill="#38bdf8" text-anchor="middle" letter-spacing="0.5">
+    YILLIK YAĞIŞ TRENDİ VE TOPLAM SU TÜKETİMİ KARŞILAŞTIRMASI
+  </text>
+  <text x="410" y="60" font-family="'Nunito Sans', sans-serif" font-size="12" font-weight="500" fill="#94a3b8" text-anchor="middle">
+    Yağışın sabit kalmasına rağmen artan nüfus, sulu tarım ve sanayi kaynaklı su açığı (1995–2025)
+  </text>
+
+  <!-- Chart Grid Area (x: 80..740, y: 90..370) -->
+  <g transform="translate(80, 90)">
+    <!-- Grid horizontal lines -->
+    <line x1="0" y1="0" x2="660" y2="0" stroke="#334155" stroke-dasharray="4 4" stroke-width="1"/>
+    <line x1="0" y1="70" x2="660" y2="70" stroke="#334155" stroke-dasharray="4 4" stroke-width="1"/>
+    <line x1="0" y1="140" x2="660" y2="140" stroke="#334155" stroke-dasharray="4 4" stroke-width="1"/>
+    <line x1="0" y1="210" x2="660" y2="210" stroke="#334155" stroke-dasharray="4 4" stroke-width="1"/>
+    <line x1="0" y1="280" x2="660" y2="280" stroke="#64748b" stroke-width="2"/>
+
+    <!-- Left Y-Axis (Yağış mm) -->
+    <text x="-15" y="8" font-family="'Nunito Sans', sans-serif" font-size="11" font-weight="700" fill="#38bdf8" text-anchor="end">700 mm</text>
+    <text x="-15" y="75" font-family="'Nunito Sans', sans-serif" font-size="11" font-weight="700" fill="#38bdf8" text-anchor="end">600 mm</text>
+    <text x="-15" y="145" font-family="'Nunito Sans', sans-serif" font-size="11" font-weight="700" fill="#38bdf8" text-anchor="end">500 mm</text>
+    <text x="-15" y="215" font-family="'Nunito Sans', sans-serif" font-size="11" font-weight="700" fill="#38bdf8" text-anchor="end">400 mm</text>
+    <text x="-15" y="285" font-family="'Nunito Sans', sans-serif" font-size="11" font-weight="700" fill="#38bdf8" text-anchor="end">300 mm</text>
+
+    <!-- X-Axis Years -->
+    <text x="0" y="305" font-family="'Nunito Sans', sans-serif" font-size="12" font-weight="600" fill="#94a3b8" text-anchor="middle">1995</text>
+    <text x="110" y="305" font-family="'Nunito Sans', sans-serif" font-size="12" font-weight="600" fill="#94a3b8" text-anchor="middle">2000</text>
+    <text x="220" y="305" font-family="'Nunito Sans', sans-serif" font-size="12" font-weight="600" fill="#94a3b8" text-anchor="middle">2005</text>
+    <text x="330" y="305" font-family="'Nunito Sans', sans-serif" font-size="12" font-weight="600" fill="#94a3b8" text-anchor="middle">2010</text>
+    <text x="440" y="305" font-family="'Nunito Sans', sans-serif" font-size="12" font-weight="600" fill="#94a3b8" text-anchor="middle">2015</text>
+    <text x="550" y="305" font-family="'Nunito Sans', sans-serif" font-size="12" font-weight="600" fill="#94a3b8" text-anchor="middle">2020</text>
+    <text x="660" y="305" font-family="'Nunito Sans', sans-serif" font-size="12" font-weight="600" fill="#94a3b8" text-anchor="middle">2025</text>
+
+    <!-- Su Açığı & Kuraklık Riski Alanı (2010 sonrasında kesişim) -->
+    <path d="M 330 135 L 440 85 L 550 40 L 660 15 L 660 140 L 550 145 L 440 130 L 330 135 Z" fill="url(#stressAreaGrad)"/>
+    <text x="510" y="95" font-family="'Nunito Sans', sans-serif" font-size="13" font-weight="800" fill="#f87171" text-anchor="middle">
+      KRİTİK SU AÇIĞI BÖLGESİ (Su Kıtlığı Riski)
+    </text>
+
+    <!-- Curve 1: Mavi Çizgi - Uzun Yıllık Yağış Miktarı (Yatay Dalgalı Trend) -->
+    <path d="M 0 130 Q 55 110, 110 145 T 220 120 T 330 135 T 440 130 T 550 145 T 660 140"
+          fill="none" stroke="#38bdf8" stroke-width="4" stroke-linecap="round"/>
+    <!-- Circles on points -->
+    <circle cx="0" cy="130" r="5" fill="#0284c7" stroke="#ffffff" stroke-width="2"/>
+    <circle cx="110" cy="145" r="5" fill="#0284c7" stroke="#ffffff" stroke-width="2"/>
+    <circle cx="220" cy="120" r="5" fill="#0284c7" stroke="#ffffff" stroke-width="2"/>
+    <circle cx="330" cy="135" r="5" fill="#0284c7" stroke="#ffffff" stroke-width="2"/>
+    <circle cx="440" cy="130" r="5" fill="#0284c7" stroke="#ffffff" stroke-width="2"/>
+    <circle cx="550" cy="145" r="5" fill="#0284c7" stroke="#ffffff" stroke-width="2"/>
+    <circle cx="660" cy="140" r="5" fill="#0284c7" stroke="#ffffff" stroke-width="2"/>
+
+    <!-- Curve 2: Kırmızı Çizgi - Toplam Su Tüketimi (Hızla Yükselen Trend) -->
+    <path d="M 0 250 Q 110 230, 220 190 T 440 85 T 660 15"
+          fill="none" stroke="#ef4444" stroke-width="4" stroke-linecap="round"/>
+    <!-- Circles on points -->
+    <circle cx="0" cy="250" r="5" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+    <circle cx="110" cy="230" r="5" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+    <circle cx="220" cy="190" r="5" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+    <circle cx="330" cy="135" r="6" fill="#facc15" stroke="#ef4444" stroke-width="3"/>
+    <circle cx="440" cy="85" r="5" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+    <circle cx="550" cy="40" r="5" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+    <circle cx="660" cy="15" r="5" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+
+    <!-- Kesişim Noktası Açıklaması (2010) -->
+    <g transform="translate(330, 135)">
+      <line x1="0" y1="0" x2="30" y2="40" stroke="#facc15" stroke-width="2"/>
+      <rect x="25" y="40" width="165" height="26" rx="4" fill="#0f172a" stroke="#facc15" stroke-width="1.2"/>
+      <text x="32" y="57" font-family="'Nunito Sans', sans-serif" font-size="11" font-weight="700" fill="#facc15">
+        2010: Tüketim Yağışı Aştı!
+      </text>
+    </g>
+  </g>
+
+  <!-- LEJANT -->
+  <g transform="translate(80, 415)">
+    <rect width="660" height="48" rx="8" fill="#0f172a" stroke="#334155" stroke-width="1.2"/>
+    <!-- Legend item 1 -->
+    <line x1="30" y1="24" x2="60" y2="24" stroke="#38bdf8" stroke-width="4"/>
+    <circle cx="45" cy="24" r="4" fill="#0284c7" stroke="#ffffff" stroke-width="1.5"/>
+    <text x="70" y="28" font-family="'Nunito Sans', sans-serif" font-size="12" font-weight="700" fill="#e2e8f0">
+      Yıllık Yağış Miktarı (Sabit/Dalgalı Bant)
+    </text>
+
+    <!-- Legend item 2 -->
+    <line x1="340" y1="24" x2="370" y2="24" stroke="#ef4444" stroke-width="4"/>
+    <circle cx="355" cy="24" r="4" fill="#dc2626" stroke="#ffffff" stroke-width="1.5"/>
+    <text x="380" y="28" font-family="'Nunito Sans', sans-serif" font-size="12" font-weight="700" fill="#fca5a5">
+      Toplam Su Tüketimi (Nüfus, Tarım, Sanayi)
+    </text>
+  </g>
+</svg>

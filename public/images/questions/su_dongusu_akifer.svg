@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="100%" height="100%" className="rounded-xl shadow-lg">
+  <defs>
+    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#bae6fd"/>
+    </linearGradient>
+    <linearGradient id="soilGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#15803d"/>
+      <stop offset="25%" stop-color="#78350f"/>
+      <stop offset="60%" stop-color="#451a03"/>
+      <stop offset="100%" stop-color="#1e1b4b"/>
+    </linearGradient>
+    <linearGradient id="waterTableGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#0284c7" stop-opacity="0.9"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background Border Frame -->
+  <rect width="800" height="480" fill="#08111f" rx="16"/>
+  <rect x="8" y="8" width="784" height="464" fill="none" stroke="#1e293b" stroke-width="2" rx="12"/>
+
+  <!-- Main Scene Area -->
+  <g transform="translate(16, 16)">
+    <!-- Sky -->
+    <rect width="768" height="180" fill="url(#skyGrad)" rx="8"/>
+
+    <!-- Mountains / Landscape -->
+    <polygon points="0,180 140,80 280,180" fill="#0369a1" opacity="0.4"/>
+    <polygon points="180,180 340,60 520,180" fill="#0284c7" opacity="0.3"/>
+
+    <!-- Clouds & Rain (Yağış) -->
+    <g transform="translate(80, 20)">
+      <ellipse cx="60" cy="30" rx="35" ry="18" fill="#ffffff" opacity="0.9"/>
+      <ellipse cx="85" cy="25" rx="30" ry="20" fill="#ffffff" opacity="0.95"/>
+      <ellipse cx="110" cy="32" rx="28" ry="16" fill="#ffffff" opacity="0.9"/>
+      <!-- Raindrops -->
+      <line x1="60" y1="55" x2="55" y2="75" stroke="#0284c7" stroke-width="2.5" stroke-dasharray="3 4"/>
+      <line x1="80" y1="58" x2="75" y2="78" stroke="#0284c7" stroke-width="2.5" stroke-dasharray="3 4"/>
+      <line x1="100" y1="55" x2="95" y2="75" stroke="#0284c7" stroke-width="2.5" stroke-dasharray="3 4"/>
+      <rect x="25" y="82" width="130" height="22" rx="4" fill="#0f172a" opacity="0.85"/>
+      <text x="90" y="97" font-family="'Nunito Sans', sans-serif" font-size="12" font-weight="700" fill="#38bdf8" text-anchor="middle">
+        YAĞIŞ (Precipitation)
+      </text>
+    </g>
+
+    <!-- Güneş & Buharlaşma -->
+    <g transform="translate(620, 20)">
+      <circle cx="60" cy="35" r="22" fill="#fbbf24"/>
+      <line x1="60" y1="5" x2="60" y2="0" stroke="#f59e0b" stroke-width="3"/>
+      <line x1="85" y1="35" x2="95" y2="35" stroke="#f59e0b" stroke-width="3"/>
+      <line x1="35" y1="35" x2="25" y2="35" stroke="#f59e0b" stroke-width="3"/>
+      <!-- Evaporation waves -->
+      <path d="M40 90 Q45 80 40 70 T40 50" fill="none" stroke="#67e8f9" stroke-width="2"/>
+      <path d="M60 90 Q65 80 60 70 T60 50" fill="none" stroke="#67e8f9" stroke-width="2"/>
+      <text x="60" y="110" font-family="'Nunito Sans', sans-serif" font-size="11" font-weight="700" fill="#0f172a" text-anchor="middle">
+        BUHARLAŞMA
+      </text>
+    </g>
+
+    <!-- Soil / Ground Layers -->
+    <rect y="160" width="768" height="280" fill="url(#soilGrad)" rx="0"/>
+
+    <!-- Yüzey Akışı & Nehir -->
+    <path d="M0 165 Q180 160 360 170 T768 165" fill="none" stroke="#16a34a" stroke-width="8"/>
+    <path d="M440 165 Q500 175 600 172 L768 178 L768 185 L580 180 Z" fill="#0284c7"/>
+    <text x="520" y="160" font-family="'Nunito Sans', sans-serif" font-size="11" font-weight="700" fill="#0284c7">
+      Yüzey Akışı (Akarsu)
+    </text>
+
+    <!-- İnfiltrasyon (Toprağa Sızma Oku) -->
+    <g transform="translate(120, 180)">
+      <line x1="20" y1="5" x2="20" y2="45" stroke="#38bdf8" stroke-width="3" stroke-dasharray="4 3"/>
+      <polygon points="20,55 14,42 26,42" fill="#38bdf8"/>
+      <rect x="35" y="15" width="160" height="24" rx="4" fill="#0f172a" opacity="0.9"/>
+      <text x="115" y="31" font-family="'Nunito Sans', sans-serif" font-size="11" font-weight="700" fill="#38bdf8" text-anchor="middle">
+        SIZMA (İnfiltrasyon)
+      </text>
+    </g>
+
+    <!-- Su Tablası (Water Table) Çizgisi -->
+    <line x1="0" y1="245" x2="768" y2="245" stroke="#38bdf8" stroke-width="2.5" stroke-dasharray="6 4"/>
+    <rect x="20" y="232" width="160" height="24" rx="4" fill="#0369a1" opacity="0.95"/>
+    <text x="100" y="248" font-family="'Nunito Sans', sans-serif" font-size="11" font-weight="800" fill="#ffffff" text-anchor="middle">
+      YER ALTI SU TABLASI
+    </text>
+
+    <!-- Serbest Akifer (Unconfined Aquifer) -->
+    <rect y="250" width="768" height="75" fill="url(#waterTableGrad)" opacity="0.85"/>
+    <text x="384" y="295" font-family="'Nunito Sans', sans-serif" font-size="14" font-weight="800" fill="#f0f9ff" text-anchor="middle" letter-spacing="1">
+      SERBEST AKİFER (Gözenekli Kum &amp; Çakıl Tabakası)
+    </text>
+
+    <!-- Geçirimsiz Kil Tabakası (Aquitard) -->
+    <rect y="325" width="768" height="25" fill="#475569" stroke="#334155" stroke-width="1.5"/>
+    <text x="384" y="342" font-family="'Nunito Sans', sans-serif" font-size="12" font-weight="700" fill="#e2e8f0" text-anchor="middle">
+      GEÇİRİMSİZ TABAKA (Kil / Masif Kayaç)
+    </text>
+
+    <!-- Basınçlı Akifer (Confined / Artesian Aquifer) -->
+    <rect y="350" width="768" height="80" fill="#0369a1" opacity="0.9"/>
+    <text x="384" y="395" font-family="'Nunito Sans', sans-serif" font-size="14" font-weight="800" fill="#e0f2fe" text-anchor="middle" letter-spacing="1">
+      BASINÇLI AKİFER (Derin Yer Altı Su Rezervuarı)
+    </text>
+
+    <!-- Sondaj Kuyusu & Pompa (Aşırı Çekim) -->
+    <g transform="translate(560, 140)">
+      <!-- Kuyu Kulesi -->
+      <polygon points="40,0 25,30 55,30" fill="#64748b" stroke="#f8fafc" stroke-width="1.5"/>
+      <!-- Boru -->
+      <rect x="37" y="30" width="6" height="230" fill="#94a3b8" stroke="#334155" stroke-width="1"/>
+      <!-- Pompa etiketi -->
+      <rect x="-80" y="40" width="110" height="24" rx="4" fill="#dc2626" opacity="0.95"/>
+      <text x="-25" y="56" font-family="'Nunito Sans', sans-serif" font-size="11" font-weight="800" fill="#ffffff" text-anchor="middle">
+        Aşırı Su Çekimi
+      </text>
+      <!-- Düşüm Konisi (Cone of Depression) -->
+      <path d="M-40 105 Q40 135 120 105" fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="3 3"/>
+      <text x="40" y="130" font-family="'Nunito Sans', sans-serif" font-size="10" font-weight="700" fill="#fecaca" text-anchor="middle">
+        Düşüm Konisi
+      </text>
+    </g>
+  </g>
+</svg>

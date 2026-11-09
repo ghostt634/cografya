@@ -1,0 +1,5 @@
+CREATE FUNCTION public.classroom_authorize(p_kind text,p_key text,p_hash text) RETURNS boolean LANGUAGE sql SECURITY DEFINER SET search_path=public AS $$
+ SELECT CASE p_kind WHEN 'workspace' THEN EXISTS(SELECT 1 FROM public.classroom_workspaces WHERE id::text=p_key AND token_hash=p_hash) WHEN 'host' THEN EXISTS(SELECT 1 FROM public.classroom_rooms WHERE (pin=p_key OR id::text=p_key) AND host_hash=p_hash AND expires_at>now()) WHEN 'player' THEN EXISTS(SELECT 1 FROM public.classroom_players p JOIN public.classroom_rooms r ON r.id=p.room_id WHERE (r.pin=p_key OR r.id::text=p_key) AND p.token_hash=p_hash AND NOT p.removed AND r.expires_at>now()) ELSE false END;
+$$;
+REVOKE ALL ON FUNCTION public.classroom_authorize(text,text,text) FROM PUBLIC;
+GRANT EXECUTE ON FUNCTION public.classroom_authorize(text,text,text) TO anon,authenticated,service_role;

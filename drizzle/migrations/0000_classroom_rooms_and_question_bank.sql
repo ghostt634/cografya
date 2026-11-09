@@ -1,0 +1,53 @@
+CREATE TABLE public.classroom_bank (id integer PRIMARY KEY, unit integer NOT NULL CHECK (unit BETWEEN 1 AND 7), difficulty text NOT NULL CHECK (difficulty IN ('kolay','orta','zor')), content jsonb NOT NULL);
+GRANT ALL ON public.classroom_bank TO service_role;
+ALTER TABLE public.classroom_bank ENABLE ROW LEVEL SECURITY;
+CREATE TABLE public.classroom_workspaces (id uuid PRIMARY KEY DEFAULT gen_random_uuid(), token_hash text NOT NULL, created_at timestamptz NOT NULL DEFAULT now());
+GRANT ALL ON public.classroom_workspaces TO service_role;
+ALTER TABLE public.classroom_workspaces ENABLE ROW LEVEL SECURITY;
+CREATE TABLE public.classroom_edits (workspace_id uuid REFERENCES public.classroom_workspaces(id), question_id integer REFERENCES public.classroom_bank(id), content jsonb NOT NULL, PRIMARY KEY(workspace_id,question_id));
+GRANT ALL ON public.classroom_edits TO service_role;
+ALTER TABLE public.classroom_edits ENABLE ROW LEVEL SECURITY;
+CREATE TABLE public.classroom_rooms (id uuid PRIMARY KEY DEFAULT gen_random_uuid(), pin text UNIQUE NOT NULL, workspace_id uuid REFERENCES public.classroom_workspaces(id), host_hash text NOT NULL, mode text NOT NULL CHECK (mode IN ('live','teams')), state jsonb NOT NULL, version integer NOT NULL DEFAULT 0, created_at timestamptz NOT NULL DEFAULT now(), expires_at timestamptz NOT NULL DEFAULT (now() + interval '7 days'));
+GRANT ALL ON public.classroom_rooms TO service_role;
+ALTER TABLE public.classroom_rooms ENABLE ROW LEVEL SECURITY;
+CREATE TABLE public.classroom_players (id uuid PRIMARY KEY DEFAULT gen_random_uuid(), room_id uuid NOT NULL REFERENCES public.classroom_rooms(id), name text NOT NULL CHECK (length(name) BETWEEN 1 AND 30), token_hash text NOT NULL, removed boolean NOT NULL DEFAULT false, seen_at timestamptz NOT NULL DEFAULT now(), UNIQUE(room_id,name));
+GRANT ALL ON public.classroom_players TO service_role;
+ALTER TABLE public.classroom_players ENABLE ROW LEVEL SECURITY;
+CREATE TABLE public.classroom_answers (room_id uuid REFERENCES public.classroom_rooms(id), question_id integer REFERENCES public.classroom_bank(id), player_id uuid REFERENCES public.classroom_players(id), choice text NOT NULL CHECK (choice IN ('A','B','C','D','E')), points integer NOT NULL DEFAULT 0, correct boolean NOT NULL DEFAULT false, PRIMARY KEY(room_id,question_id,player_id));
+GRANT ALL ON public.classroom_answers TO service_role;
+ALTER TABLE public.classroom_answers ENABLE ROW LEVEL SECURITY;
+CREATE TABLE public.classroom_adjustments (id uuid PRIMARY KEY DEFAULT gen_random_uuid(), room_id uuid NOT NULL REFERENCES public.classroom_rooms(id), team_id text NOT NULL, delta integer NOT NULL, reason text NOT NULL, created_at timestamptz NOT NULL DEFAULT now());
+GRANT ALL ON public.classroom_adjustments TO service_role;
+ALTER TABLE public.classroom_adjustments ENABLE ROW LEVEL SECURITY;
+CREATE TABLE public.classroom_signals (id uuid PRIMARY KEY, version integer NOT NULL DEFAULT 0);
+GRANT SELECT ON public.classroom_signals TO anon, authenticated;
+GRANT ALL ON public.classroom_signals TO service_role;
+ALTER TABLE public.classroom_signals ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Data-free change notifications" ON public.classroom_signals FOR SELECT TO anon,authenticated USING(true);
+ALTER PUBLICATION supabase_realtime ADD TABLE public.classroom_signals;
+CREATE FUNCTION public.classroom_commit(p_id uuid,p_version integer,p_state jsonb,p_signal uuid) RETURNS boolean LANGUAGE plpgsql SECURITY DEFINER SET search_path=public AS $$
+BEGIN
+ UPDATE public.classroom_rooms SET state=p_state,version=version+1 WHERE id=p_id AND version=p_version;
+ IF NOT FOUND THEN RETURN false; END IF;
+ INSERT INTO public.classroom_signals(id,version) VALUES(p_signal,p_version+1) ON CONFLICT(id) DO UPDATE SET version=excluded.version;
+ RETURN true;
+END $$;
+REVOKE ALL ON FUNCTION public.classroom_commit(uuid,integer,jsonb,uuid) FROM PUBLIC,anon,authenticated;
+GRANT EXECUTE ON FUNCTION public.classroom_commit(uuid,integer,jsonb,uuid) TO service_role;
+CREATE FUNCTION public.classroom_answer(p_room uuid,p_player uuid,p_question integer,p_choice text) RETURNS boolean LANGUAGE plpgsql SECURITY DEFINER SET search_path=public AS $$
+DECLARE r public.classroom_rooms; q jsonb; earned integer; valid boolean;
+BEGIN
+ SELECT * INTO r FROM public.classroom_rooms WHERE id=p_room FOR UPDATE;
+ IF r.state->>'phase'<>'open' OR (r.state->>'paused')::boolean OR (r.state->>'deadline' IS NOT NULL AND (r.state->>'deadline')::timestamptz<=now()) THEN RAISE EXCEPTION 'Soru kapandı veya duraklatıldı.'; END IF;
+ q:=r.state->'questions'->((r.state->>'index')::integer);
+ IF (q->>'id')::integer<>p_question THEN RAISE EXCEPTION 'Soru değişti.'; END IF;
+ IF NOT EXISTS(SELECT 1 FROM public.classroom_players WHERE id=p_player AND room_id=p_room AND NOT removed) THEN RAISE EXCEPTION 'Katılımcı bulunamadı.'; END IF;
+ valid:=q->>'correctAnswer'=p_choice;
+ earned:=CASE WHEN valid THEN (q->>'points')::integer ELSE 0 END;
+ INSERT INTO public.classroom_answers(room_id,player_id,question_id,choice,points,correct) VALUES(p_room,p_player,p_question,p_choice,earned,valid) ON CONFLICT DO NOTHING;
+ IF NOT FOUND THEN RAISE EXCEPTION 'Cevabınız zaten kaydedildi.'; END IF;
+ INSERT INTO public.classroom_signals(id,version) VALUES((r.state->>'signal')::uuid,1) ON CONFLICT(id) DO UPDATE SET version=public.classroom_signals.version+1;
+ RETURN true;
+END $$;
+REVOKE ALL ON FUNCTION public.classroom_answer(uuid,uuid,integer,text) FROM PUBLIC,anon,authenticated;
+GRANT EXECUTE ON FUNCTION public.classroom_answer(uuid,uuid,integer,text) TO service_role;

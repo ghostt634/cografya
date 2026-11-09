@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 500" width="100%" height="100%" className="rounded-xl shadow-lg">
+  <defs>
+    <linearGradient id="mapBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1526"/>
+      <stop offset="100%" stop-color="#030b17"/>
+    </linearGradient>
+    <filter id="glowMark">
+      <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="840" height="500" fill="url(#mapBg)" rx="16"/>
+  <rect x="8" y="8" width="824" height="484" fill="none" stroke="#1e293b" stroke-width="2" rx="12"/>
+
+  <!-- Title -->
+  <text x="420" y="38" font-family="'Nunito Sans', sans-serif" font-size="20" font-weight="700" fill="#38bdf8" text-anchor="middle" letter-spacing="0.5">
+    TÜRKİYE BAŞLICA MADEN VE ENERJİ HAMMADDELERİ DAĞILIŞI
+  </text>
+  <text x="420" y="60" font-family="'Nunito Sans', sans-serif" font-size="12" font-weight="500" fill="#94a3b8" text-anchor="middle">
+    Sanayi ve Teknoloji Açısından Stratejik Yataklar (MEB 11. Sınıf Müfredatı)
+  </text>
+
+  <!-- Stylized Turkey Outline Polygon -->
+  <g transform="translate(60, 50)">
+    <!-- Sea water body backdrop -->
+    <path d="M40 180 Q80 120 180 110 T380 90 T540 100 T660 140 L690 190 L680 270 L600 290 L480 300 L380 320 L260 310 L160 300 L90 280 L50 240 Z"
+          fill="#0f243a" stroke="#1e3a5f" stroke-width="2" opacity="0.6"/>
+
+    <!-- Anatolia Main Geometry -->
+    <path d="M60 170 C90 140, 150 120, 240 130 C300 135, 360 100, 440 95 C520 90, 600 110, 670 140 C690 170, 710 220, 680 260 C650 280, 590 285, 520 280 C440 280, 390 310, 310 300 C220 295, 140 290, 80 270 C50 250, 40 200, 60 170 Z"
+          fill="#13273e" stroke="#38bdf8" stroke-width="2.5"/>
+
+    <!-- Trakya -->
+    <path d="M40 110 L90 95 L110 130 L70 145 Z" fill="#13273e" stroke="#38bdf8" stroke-width="2"/>
+
+    <!-- Deniz İsimleri -->
+    <text x="420" y="80" font-family="'Nunito Sans', sans-serif" font-size="12" font-weight="700" fill="#0284c7" opacity="0.7" letter-spacing="2">KARADENİZ</text>
+    <text x="360" y="340" font-family="'Nunito Sans', sans-serif" font-size="12" font-weight="700" fill="#0284c7" opacity="0.7" letter-spacing="2">AKDENİZ</text>
+    <text x="15" y="220" font-family="'Nunito Sans', sans-serif" font-size="11" font-weight="700" fill="#0284c7" opacity="0.7" letter-spacing="1">EGE DENİZİ</text>
+
+    <!-- Maden Noktaları ve Etiketleri -->
+
+    <!-- 1. BOR: Balıkesir (Bigadiç, Susurluk), Kütahya (Emet), Eskişehir (Kırka) -->
+    <g transform="translate(160, 180)" filter="url(#glowMark)">
+      <circle cx="0" cy="0" r="9" fill="#f59e0b" stroke="#ffffff" stroke-width="2"/>
+      <rect x="12" y="-12" width="130" height="24" rx="4" fill="#0f172a" stroke="#f59e0b" stroke-width="1"/>
+      <text x="18" y="4" font-family="'Nunito Sans', sans-serif" font-size="11" font-weight="700" fill="#fbbf24">BOR (Balıkesir/Kütahya)</text>
+    </g>
+
+    <!-- 2. DEMİR: Sivas (Divriği) ve Malatya (Hekimhan) -->
+    <g transform="translate(480, 175)" filter="url(#glowMark)">
+      <polygon points="0,-10 9,7 -9,7" fill="#ef4444" stroke="#ffffff" stroke-width="1.8"/>
+      <rect x="14" y="-14" width="125" height="24" rx="4" fill="#0f172a" stroke="#ef4444" stroke-width="1"/>
+      <text x="20" y="2" font-family="'Nunito Sans', sans-serif" font-size="11" font-weight="700" fill="#f87171">DEMİR (Divriği/Sivas)</text>
+    </g>
+
+    <!-- 3. KROM: Elazığ (Guleman) ve Muğla (Fethiye) -->
+    <g transform="translate(540, 210)" filter="url(#glowMark)">
+      <rect x="-7" y="-7" width="14" height="14" fill="#10b981" stroke="#ffffff" stroke-width="1.8"/>
+      <rect x="14" y="-12" width="130" height="24" rx="4" fill="#0f172a" stroke="#10b981" stroke-width="1"/>
+      <text x="20" y="4" font-family="'Nunito Sans', sans-serif" font-size="11" font-weight="700" fill="#34d399">KROM (Guleman/Elazığ)</text>
+    </g>
+
+    <!-- 4. BOKSİT (Alüminyum): Konya (Seydişehir) -->
+    <g transform="translate(280, 250)" filter="url(#glowMark)">
+      <polygon points="0,-9 8,0 0,9 -8,0" fill="#a855f7" stroke="#ffffff" stroke-width="1.8"/>
+      <rect x="14" y="-12" width="135" height="24" rx="4" fill="#0f172a" stroke="#a855f7" stroke-width="1"/>
+      <text x="20" y="4" font-family="'Nunito Sans', sans-serif" font-size="11" font-weight="700" fill="#c084fc">BOKSİT (Seydişehir/Konya)</text>
+    </g>
+
+    <!-- 5. BAKIR: Artvin (Murgul), Kastamonu (Küre) -->
+    <g transform="translate(570, 120)" filter="url(#glowMark)">
+      <circle cx="0" cy="0" r="7" fill="#f97316" stroke="#ffffff" stroke-width="1.8"/>
+      <rect x="12" y="-12" width="125" height="24" rx="4" fill="#0f172a" stroke="#f97316" stroke-width="1"/>
+      <text x="18" y="4" font-family="'Nunito Sans', sans-serif" font-size="11" font-weight="700" fill="#fb923c">BAKIR (Murgul/Artvin)</text>
+    </g>
+
+    <!-- 6. TAŞ KÖMÜRÜ: Zonguldak -->
+    <g transform="translate(290, 125)" filter="url(#glowMark)">
+      <rect x="-6" y="-6" width="12" height="12" fill="#64748b" stroke="#ffffff" stroke-width="1.5"/>
+      <rect x="12" y="-12" width="125" height="24" rx="4" fill="#0f172a" stroke="#94a3b8" stroke-width="1"/>
+      <text x="18" y="4" font-family="'Nunito Sans', sans-serif" font-size="11" font-weight="700" fill="#cbd5e1">KÖMÜR (Zonguldak)</text>
+    </g>
+  </g>
+
+  <!-- LEJANT (Harita Açıklama Kutusu) -->
+  <g transform="translate(60, 400)">
+    <rect width="720" height="70" rx="8" fill="#0f172a" stroke="#334155" stroke-width="1.2"/>
+    <text x="20" y="22" font-family="'Nunito Sans', sans-serif" font-size="12" font-weight="700" fill="#94a3b8">LEJANT (Harita İşaretleri):</text>
+
+    <!-- Sembol 1 -->
+    <circle cx="30" cy="45" r="7" fill="#f59e0b" stroke="#ffffff" stroke-width="1.5"/>
+    <text x="45" y="49" font-family="'Nunito Sans', sans-serif" font-size="12" font-weight="600" fill="#e2e8f0">Bor (Dünya Rezervinin %73'ü)</text>
+
+    <!-- Sembol 2 -->
+    <polygon points="230,37 238,53 222,53" fill="#ef4444" stroke="#ffffff" stroke-width="1.5"/>
+    <text x="248" y="49" font-family="'Nunito Sans', sans-serif" font-size="12" font-weight="600" fill="#e2e8f0">Demir (Divriği-Hekimhan)</text>
+
+    <!-- Sembol 3 -->
+    <rect x="420" y="38" width="13" height="13" fill="#10b981" stroke="#ffffff" stroke-width="1.5"/>
+    <text x="440" y="49" font-family="'Nunito Sans', sans-serif" font-size="12" font-weight="600" fill="#e2e8f0">Krom (Paslanmaz Çelik)</text>
+
+    <!-- Sembol 4 -->
+    <polygon points="610,38 617,45 610,52 603,45" fill="#a855f7" stroke="#ffffff" stroke-width="1.5"/>
+    <text x="625" y="49" font-family="'Nunito Sans', sans-serif" font-size="12" font-weight="600" fill="#e2e8f0">Boksit (Alüminyum)</text>
+  </g>
+</svg>
